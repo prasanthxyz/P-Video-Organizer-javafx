@@ -8,6 +8,8 @@ import java.util.*;
 public class RpsData {
     private final String RPS_CONFIG_FILENAME = "pvorg.json";
 
+    private String vidPath;
+    private String namPath;
     private List<String> videoNames;
     private List<String> galleryNames;
     private List<String> tagNames;
@@ -26,6 +28,8 @@ public class RpsData {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             RpsConfig rpsConfig = objectMapper.readValue(jsonFile, RpsConfig.class);
+            vidPath = rpsConfig.getVidPath();
+            namPath = rpsConfig.getNamPath();
             loadVideoNames(rpsConfig);
             loadGalleryNames(rpsConfig);
             loadTagNames(rpsConfig);
@@ -41,6 +45,14 @@ public class RpsData {
             System.out.println("Error reading config file: " + configFilePath + e.toString());
             System.exit(1);
         }
+    }
+
+    public String getVidPath() {
+        return vidPath;
+    }
+
+    public String getNamPath() {
+        return namPath;
     }
 
     public List<String> getVideoNames() {

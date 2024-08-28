@@ -7,6 +7,7 @@ module com.wordpress.prasanthxyz.pvorg {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires com.fasterxml.jackson.databind;
+    requires javafx.media;
 
     opens com.wordpress.prasanthxyz.pvorg to javafx.fxml,com.fasterxml.jackson.databind;
     exports com.wordpress.prasanthxyz.pvorg;
