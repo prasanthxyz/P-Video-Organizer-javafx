@@ -17,7 +17,7 @@ public class ViewTab extends Tab {
     private RpsData rpsData;
     private Label labelVid;
     private Label labelNam;
-    private VBoxVidTgp vBoxVidTgp;
+    private StackPaneVidTgp stackPaneVidTgp;
     private VBoxGal vBoxGal;
     public ViewTab(String text, RpsData rpsData) {
         super(text);
@@ -29,7 +29,7 @@ public class ViewTab extends Tab {
         HBox.setHgrow(spacer1, Priority.ALWAYS);
         Button buttonTgpVid = new Button("TGP/VID");
         buttonTgpVid.setOnAction(event -> {
-            this.vBoxVidTgp.toggleTgpVid();
+            this.stackPaneVidTgp.toggleTgpVid();
         });
 
         Button buttonPrev = new Button("Prev");
@@ -44,7 +44,7 @@ public class ViewTab extends Tab {
         HBox.setHgrow(spacer2, Priority.ALWAYS);
         this.labelNam = new Label("NAM");
 
-        vBoxVidTgp = new VBoxVidTgp(rpsData);
+        stackPaneVidTgp = new StackPaneVidTgp(rpsData);
         vBoxGal = new VBoxGal(rpsData);
 
         HBox hBoxControlsLeft = new HBox();
@@ -65,9 +65,9 @@ public class ViewTab extends Tab {
 
         HBox hBoxView = new HBox(4);
         VBox.setVgrow(hBoxView, Priority.ALWAYS);
-        hBoxView.getChildren().addAll(vBoxVidTgp, vBoxGal);
+        hBoxView.getChildren().addAll(stackPaneVidTgp, vBoxGal);
         hBoxView.widthProperty().addListener((observable, oldValue, newValue) -> {
-            vBoxVidTgp.setPrefWidth(newValue.doubleValue() * 0.75);
+            stackPaneVidTgp.setPrefWidth(newValue.doubleValue() * 0.75);
             vBoxGal.setPrefWidth(newValue.doubleValue() * 0.25);
         });
 
@@ -82,16 +82,16 @@ public class ViewTab extends Tab {
                 int digit = Integer.parseInt(event.getText());
                 if (digit >= 1 && digit <= 9) {
                     double seekPercentage = digit * 10 / 100.0;
-                    vBoxVidTgp.getVBoxVidView().seekVideo(seekPercentage);
+                    stackPaneVidTgp.getVBoxVidView().seekVideo(seekPercentage);
                 }
             } else if (event.getCode() == KeyCode.LEFT) {
-                vBoxVidTgp.getVBoxVidView().seekVideo(vBoxVidTgp.getVBoxVidView().getProgressBar().getValue() - 5);
+                stackPaneVidTgp.getVBoxVidView().seekVideo(stackPaneVidTgp.getVBoxVidView().getProgressBar().getValue() - 5);
             } else if (event.getCode() == KeyCode.RIGHT) {
-                vBoxVidTgp.getVBoxVidView().seekVideo(vBoxVidTgp.getVBoxVidView().getProgressBar().getValue() + 5);
+                stackPaneVidTgp.getVBoxVidView().seekVideo(stackPaneVidTgp.getVBoxVidView().getProgressBar().getValue() + 5);
             } else if (event.getCode() == KeyCode.SPACE) {
-                vBoxVidTgp.getVBoxVidView().togglePlayPause();
+                stackPaneVidTgp.getVBoxVidView().togglePlayPause();
             } else if (event.getCode() == KeyCode.P) {
-                vBoxVidTgp.toggleTgpVid();
+                stackPaneVidTgp.toggleTgpVid();
             } else if (event.getCode() == KeyCode.N) {
                 this.navigateCombination(true);
             } else if (event.getCode() == KeyCode.B) {
@@ -113,8 +113,8 @@ public class ViewTab extends Tab {
         Combination combination = this.rpsData.getCurrentCombination();
         this.labelVid.setText(combination.getVideoName());
         this.labelNam.setText(combination.getGalleryName());
-        this.vBoxVidTgp.getVBoxVidView().setupVideoPlayer();
-        this.vBoxVidTgp.getVBoxTgpView().showCurrentTgp();
+        this.stackPaneVidTgp.getVBoxVidView().setupVideoPlayer();
+        this.stackPaneVidTgp.getVBoxTgpView().showCurrentTgp();
         this.vBoxGal.showCurrentGallery();
     }
 }

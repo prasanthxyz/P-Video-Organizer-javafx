@@ -29,7 +29,6 @@ public class VBoxGal extends VBox {
         imageView.setFitWidth(100);
 
         this.getChildren().add(imageView);
-        this.setStyle("-fx-border-color: black");
         this.showCurrentGallery();
     }
 

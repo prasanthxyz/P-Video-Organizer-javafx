@@ -23,7 +23,7 @@ public class VBoxVidView extends VBox {
         this.isVideoPlaying = false;
         this.mediaView = new MediaView();
         this.mediaView.setPreserveRatio(true);
-        this.mediaView.setFitWidth(500);
+        this.mediaView.fitWidthProperty().bind(this.prefWidthProperty());
 
         this.progressBar = new Slider();
         this.progressBar.setMin(0);
@@ -41,7 +41,6 @@ public class VBoxVidView extends VBox {
         HBox hBoxControls = new HBox(progressBar);
         this.getChildren().addAll(mediaView, hBoxControls);
 
-        this.setStyle("-fx-border-color: red");
         this.setupVideoPlayer();
     }
 

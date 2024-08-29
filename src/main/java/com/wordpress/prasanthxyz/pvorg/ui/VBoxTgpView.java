@@ -18,9 +18,8 @@ public class VBoxTgpView extends VBox {
         this.rpsData = rpsData;
         this.imageView = new ImageView();
         imageView.setPreserveRatio(true);
-        imageView.setFitWidth(500);
+        imageView.fitWidthProperty().bind(this.prefWidthProperty());
 
-        this.setStyle("-fx-border-color: green");
         this.getChildren().add(imageView);
         this.showCurrentTgp();
     }
